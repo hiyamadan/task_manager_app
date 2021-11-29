@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const Task = mongoose.model("Task",{
+const taskSchema = new mongoose.Schema({
     description:{
         type:String,
         trim:true,
@@ -15,7 +15,25 @@ const Task = mongoose.model("Task",{
         required:true,
         ref:'User'
     }
+},{
+    timestamps:true
 })
+const Task = mongoose.model("Task",taskSchema)
+
+module.exports = Task
+
+
+
+
+
+
+
+
+
+
+
+
+
 // const task1 = new Task({
 //     description:'Clean your room',
 //     completed:false
@@ -25,5 +43,3 @@ const Task = mongoose.model("Task",{
 // }).catch((error)=>{
 //     console.log('Error:',error);
 // })
-
-module.exports = Task

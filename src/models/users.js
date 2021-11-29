@@ -52,16 +52,18 @@ const userSchema = new mongoose.Schema({
         tokens:[{
             token:{
                 type: String,
-                // required:true
+                required:true
             }
         }]
     
+},{
+    timestamps:true
 })
 
-userSchema.virtual('tasks',{
-    ref:'Task',
-    localField:'_id',
-    foreignField: "owner",
+userSchema.virtual('tasks', {
+    ref: 'Task',
+    localField: '_id',
+    foreignField: 'owner'
 })
 
 userSchema.methods.toJSON = function(){
@@ -114,6 +116,13 @@ userSchema.pre('remove',async function(next){
 
 const User = mongoose.model('User', userSchema)
 
+module.exports = User
+
+
+
+
+
+
 // const me = new User({
 //     name:'    Hiya   ',
 //     email:'hiya@gmail.com',
@@ -125,5 +134,3 @@ const User = mongoose.model('User', userSchema)
 // }).catch((error)=>{
 //     console.log('Error!',error);
 // })
-
-module.exports = User
